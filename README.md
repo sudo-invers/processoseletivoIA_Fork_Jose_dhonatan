@@ -8,23 +8,28 @@
 
 O modelo que foi implementado, é uma Rede Neural Convolucional (CNN) simples para classificação de dígitos do dataset MNIST.
 
-A arquitetura é composta por:
+### A arquitetura é composta por:
 
-Uma camada **Conv2D** com 32 filtros e ativação ReLU (Unidade Linear Retificada) para extração inicial de características
-Uma camada **MaxPooling2D** para redução de dimensionalidade
-Uma segunda camada **Conv2D** com 64 filtros e ativação ReLU
-Uma camada **MaxPooling2D**
-Uma camada **Flatten** para transformar os dados em vetor
-Uma camada **Dense** com 64 neurônios e ativação ReLU
-Uma camada final **Dense** com 10 neurônios e ativação Softmax para classificação
-
-O modelo recebe imagens 28x28 em escala de cinza e retorna a probabilidade para cada uma das 10 classes.
+- Conv2D (32 filtros, 3x3, ReLU)
+  - Responsável pela extração de características básicas como bordas e traços.
+- MaxPooling2D (2x2)
+  - Reduz a dimensionalidade espacial, diminuindo custo computacional e ajudando na generalização.
+- Conv2D (64 filtros, 3x3, ReLU)
+  - Aprende padrões mais complexos a partir das features iniciais.
+- MaxPooling2D (2x2)
+  - Nova redução dimensional.
+- Flatten
+  - Converte os mapas de características em um vetor unidimensional.
+- Dense (64 neurônios, ReLU)
+  - Combina as features extraídas pela CNN.
+- Dense (10 neurônios, Softmax)
+  - Camada de saída que gera a probabilidade para cada classe (0 a 9).
+    - O modelo recebe imagens 28x28 em escala de cinza e retorna a probabilidade para cada uma das 10 classes.
 
 ## Principais bibliotecas utilizadas
 
-**TensorFlow** (incluindo Keras API)
-**NumPy** (indiretamente via TensorFlow)
-**os** (manipulação de arquivos)
+- **TensorFlow** (incluindo Keras API)
+- **os** (manipulação de arquivos)
 
 ## Técnica de otimização do modelo
 
@@ -46,7 +51,7 @@ converter.optimizations = [tf.lite.Optimize.DEFAULT]
 
 Após o treinamento do modelo:
 
-O modelo atingiu aproximadamente, alta acurácia, **(≈99.8%)** no conjunto de testes
+O modelo atingiu aproximadamente, alta acurácia, **(≈99%)** no conjunto de testes
 O modelo foi salvo em formato `.h5`
 Após otimização, foi gerado um modelo `.tflite` mais leve e eficiente
 
@@ -65,10 +70,10 @@ Aplicação de quantização para melhorar eficiência em deploy
 ### Limitações do modelo
 
 Arquitetura simples pode não capturar padrões muito mais complexos
-O treinamento foi realizado com poucas epocas (5), oque pode limitar desempenho máximo
+O treinamento foi realizado com poucas epocas (4), oque pode limitar desempenho máximo se os dados a serem treinados forem muito maiores
 
 ### Oque aprendi no desafio
 
-Pipeline completo: treino → avaliação → otimização → exportação
-Importância da otimização para uso em dispositivos embarcados
-Boas práticas na organização de scripts (treino e conversão separados)
+- Pipeline completo: treino → avaliação → otimização → exportação
+- Importância da otimização para uso em dispositivos embarcados
+- Boas práticas na organização de scripts (treino e conversão separados)
