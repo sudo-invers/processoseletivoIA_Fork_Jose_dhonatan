@@ -16,6 +16,9 @@ def main():
     # Apply Dynamic Range Quantization (Optimization)
     converter.optimizations = [tf.lite.Optimize.DEFAULT]
 
+    # Enable FLOAT16 quantization (good balance between size and accuracy)
+    converter.target_spec.supported_types = [tf.float16]
+
     tflite_model = converter.convert()
 
     with open("model.tflite", "wb") as f:
