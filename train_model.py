@@ -20,12 +20,12 @@ def main():
 
     model = models.Sequential(
         [
-            layers.Conv2D(4, (3, 3), activation="relu", input_shape=(28, 28, 1)),
+            layers.Conv2D(8, (3, 3), activation="relu", input_shape=(28, 28, 1)),
             layers.MaxPooling2D((2, 2)),
-            layers.Conv2D(8, (3, 3), activation="relu"),
+            layers.Conv2D(16, (3, 3), activation="relu"),
             layers.MaxPooling2D((2, 2)),
             layers.Flatten(),
-            layers.Dense(32, activation="relu"),
+            layers.Dense(16, activation="relu"),
             layers.Dense(10, activation="softmax"),
         ]
     )
